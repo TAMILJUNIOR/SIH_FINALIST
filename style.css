@@ -9,27 +9,42 @@
 
 /* GENERAL */
 *{box-sizing:border-box}
-body{margin:0;font-family: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; color:var(--ink);}
+body{
+  margin:0;
+  font-family: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  color:var(--ink);
+}
 
-/* Floating canvas for hearts — let clicks pass through */
+/* Floating hearts layer (does NOT block clicks) */
 .float-canvas{
   position: fixed;
   inset: 0;
-  pointer-events: none; /* <-- allow clicks to pass through to buttons */
+  pointer-events: none;
   z-index: 50;
 }
 
-/* ensure login card and letter frame sit above hearts */
+/* UI sits above hearts */
 .login-card, .letter-frame, .denied-card {
   position: relative;
-  z-index: 100; /* bring UI above hearts */
+  z-index: 100;
 }
 
 /* LOGIN PAGE ROMANTIC */
 .login-body-romantic{
   min-height:100vh;
   background: radial-gradient(circle at 10% 10%, #fff0f6 0%, #fdeff3 30%, #fff7f5 100%);
-  display:flex;align-items:center;justify-content:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* Romantic font overrides for login page */
+.login-card, 
+.login-title, 
+.login-sub, 
+.btn, 
+.tip {
+  font-family: 'Poppins', 'Parisienne', cursive !important;
 }
 
 .login-card{
@@ -43,40 +58,95 @@ body{margin:0;font-family: 'Montserrat', system-ui, -apple-system, 'Segoe UI', R
   border:1px solid rgba(255, 120, 160, 0.06);
 }
 
-.logo-hearts{font-size:28px; margin-bottom:6px}
-.login-title{font-family:'Great Vibes', cursive; font-size:40px; margin:6px 0; color:var(--accent); text-shadow: 0 1px 0 #fff;}
-.login-sub{color:#8a5a65;margin:8px 0 18px}
+.logo-hearts{
+  font-size:28px;
+  margin-bottom:6px;
+}
 
-.btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.login-title{
+  font-family: 'Parisienne', cursive !important;
+  font-size:46px;
+  margin:6px 0;
+  color:var(--accent);
+  letter-spacing:1px;
+  text-shadow: 0 2px 4px rgba(255,140,170,0.3);
+}
+
+.login-sub{
+  font-family: 'Poppins', sans-serif !important;
+  font-size:16px;
+  font-weight:400;
+  color:#a86878;
+  margin:8px 0 20px;
+}
+
+.btns{
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
 .btn{
   cursor:pointer;
   border:0;
   padding:12px 18px;
   border-radius:999px;
   font-weight:600;
+  font-family:'Poppins', sans-serif !important;
+  letter-spacing:0.3px;
   box-shadow:0 6px 18px rgba(255,107,154,0.12);
   transition:transform .16s ease, box-shadow .16s;
 }
-.btn.yes{background: linear-gradient(90deg,#ffb3c6,#ff6b9a); color:white;}
-.btn.no{background:transparent;border:2px solid rgba(200,120,150,0.18); color:var(--ink);}
 
-.btn:hover{transform:translateY(-4px);box-shadow:0 18px 30px rgba(255,107,154,0.14)}
+.btn.yes{
+  background: linear-gradient(90deg,#ffb3c6,#ff6b9a);
+  color:white;
+}
+
+.btn.no{
+  background:transparent;
+  border:2px solid rgba(200,120,150,0.18);
+  color:var(--ink);
+}
+
+.btn:hover{
+  transform:translateY(-4px);
+  box-shadow:0 18px 30px rgba(255,107,154,0.14);
+}
 
 /* TIP */
-.tip{display:block;margin-top:14px;color:#a67a88;font-size:13px}
+.tip{
+  display:block;
+  margin-top:14px;
+  color:#a67a88;
+  font-size:13px;
+}
 
 /* LETTER PAGE */
 .letter-body-romantic{
   min-height:100vh;
   background: url('images/paper-bg.jpg') center/cover fixed no-repeat;
-  display:flex;align-items:center;justify-content:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   padding:40px;
 }
 
-#letter-stage{position:relative;width:100%;max-width:880px}
-.vignette{position:absolute;inset:0;background:radial-gradient(ellipse at center, rgba(255,255,255,0) 0%, rgba(0,0,0,0.06) 70%);border-radius:12px;pointer-events:none;}
+#letter-stage{
+  position:relative;
+  width:100%;
+  max-width:880px;
+}
 
-/* Letter frame */
+.vignette{
+  position:absolute;
+  inset:0;
+  background:radial-gradient(ellipse at center, rgba(255,255,255,0) 0%, rgba(0,0,0,0.06) 70%);
+  border-radius:12px;
+  pointer-events:none;
+}
+
 .letter-frame{
   position:relative;
   background: linear-gradient(180deg, rgba(255,250,243,0.95), rgba(255,246,240,0.9));
@@ -92,8 +162,11 @@ body{margin:0;font-family: 'Montserrat', system-ui, -apple-system, 'Segoe UI', R
   top: -18px;
   background: var(--gold);
   color: white;
-  width:46px;height:46px;
-  display:flex;align-items:center;justify-content:center;
+  width:46px;
+  height:46px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   border-radius:50%;
   font-weight:700;
   box-shadow:0 8px 20px rgba(212,165,135,0.3);
@@ -118,10 +191,8 @@ body{margin:0;font-family: 'Montserrat', system-ui, -apple-system, 'Segoe UI', R
   overflow:auto;
   padding-right:6px;
   white-space: pre-line;
-
 }
 
-/* signature and emoji row */
 .signature{
   margin-top:28px;
   font-style:italic;
@@ -129,19 +200,42 @@ body{margin:0;font-family: 'Montserrat', system-ui, -apple-system, 'Segoe UI', R
   font-size:18px;
   color:#7a4a4a;
 }
-.emoji-row{text-align:center;margin-top:16px;font-size:22px}
+
+.emoji-row{
+  text-align:center;
+  margin-top:16px;
+  font-size:22px;
+}
 
 /* DENIED PAGE */
 .denied-body-romantic{
-  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   background: linear-gradient(180deg,#fffafc,#fff2f5);
 }
 
 .denied-card{
-  width:96%;max-width:600px;padding:28px;border-radius:14px;text-align:center;background:var(--paper);box-shadow:0 12px 40px rgba(160,82,120,0.06)
+  width:96%;
+  max-width:600px;
+  padding:28px;
+  border-radius:14px;
+  text-align:center;
+  background:var(--paper);
+  box-shadow:0 12px 40px rgba(160,82,120,0.06);
 }
-.denied-card h2{font-family:'Great Vibes',cursive;color:var(--accent);font-size:36px;margin:8px 0}
-.denied-card p{color:#6b3f46}
+
+.denied-card h2{
+  font-family:'Great Vibes',cursive;
+  color:var(--accent);
+  font-size:36px;
+  margin:8px 0;
+}
+
+.denied-card p{
+  color:#6b3f46;
+}
 
 /* small screens */
 @media (max-width:520px){
@@ -150,12 +244,14 @@ body{margin:0;font-family: 'Montserrat', system-ui, -apple-system, 'Segoe UI', R
   .letter-heading{font-size:34px}
 }
 
-/* heart bubble style generated by JS */
+/* heart style */
 .heart {
   position:fixed;
   pointer-events:none;
   width:32px;height:32px;
-  display:flex;align-items:center;justify-content:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   transform:translate(-50%,-50%) scale(0.9);
   will-change: transform, opacity;
   z-index:9999;
@@ -163,5 +259,3 @@ body{margin:0;font-family: 'Montserrat', system-ui, -apple-system, 'Segoe UI', R
   filter: drop-shadow(0 6px 18px rgba(255,96,145,0.12));
   font-size:22px;
 }
-
-/* gentle float animation (applied inline via JS for variation) */
