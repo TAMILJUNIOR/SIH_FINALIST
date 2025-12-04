@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>For My Captain ❤️</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="letter-body-romantic">
+
+  <!-- BACKGROUND MUSIC: autoplay allowed when muted; we'll try to unmute after -->
+  <audio id="bg-music" src="audio/visiri.mp3" loop autoplay muted></audio>
+
+
+  <div id="letter-stage">
+    <div class="vignette"></div>
+
+    <div class="letter-frame">
+      <div class="seal">✶</div>
+
+      <h1 class="letter-heading">To my dear Jay ❤️ </h1>
+
+      <div class="letter-content" id="letterContent" style="white-space: pre-line;">
+        <!-- letterText will type out via JS for a soft reveal -->
+      </div>
+
+      <div class="signature"> — your junior ✨</div>
+    </div>
+  </div>
+
+  <div id="floatCanvas" class="float-canvas"></div>
+
+  <script src="hearts.js"></script>
+  <script src="script.js"></script>
+  <script>
+    // letter text (keeps blank lines)
+    const letterText = `
+Hey captain,
+
+first of all, All the best for your finals. Some might say its always about journey not about victory and some might say its always about victory not journey.
+
+but my dear, I know both the journey and victory matters to you equally in this case.
+
+I have seen you putting all efforts in this and i know you will give your 100 percent in the finals too.
+
+so its just a one step away from your victory.
+
+I am sooo proud of you carrying the whole team and striding forward with great intensions.
+
+like i have always admired you, i am admiring you more today.
+
+i know you will keep make me say "Awwww this man can do anything!"
+
+Just remember to stay calm and lead the team.
+
+Now for my baby i have to say one thing, take care of yourself too, eat properly and keep calm.
+
+I want you to win this as much as you want to win it, for yourself.
+
+At the end of the day you have your own personal cheerleader who stands by you and cheer you till she dies.
+
+even though i wont be there, just remember i am always here for you.
+
+I can be your ground control when you fly high, if u need anything you can always reach to me, or i can also just be your "PA Forever" when u need me.
+
+You know i love you sooooo much and stand with you.
+
+finally, i know you will win and smash the result in everyone face.
+
+Trust yourself completely.
+
+remember,
+"Veni.vidi.vici"
+`;
+
+    // typewriter effect + smart autoplay attempt
+    document.addEventListener('DOMContentLoaded', ()=> {
+      const bg = document.getElementById('bg-music');
+
+      // typewriter reveal
+      typeWriter(letterText, document.getElementById('letterContent'), 18, async ()=>{
+        // After reveal we TRY to play audible audio.
+        // If browser blocks audible autoplay, we will keep the muted audio running
+        // (it already autoplayed muted), and then wait for a user click to unmute.
+        try {
+          // try unmuted play first
+          bg.muted = false;
+          bg.volume = 0.08;
+          await bg.play();
+          // success: audible playing
+        } catch(e) {
+          // blocked: ensure muted audio is playing (muted autoplay allowed)
+          try {
+            bg.muted = true;
+            await bg.play();
+          } catch(err){ /* ignore */ }
+
+          // add one-time click handler so the next click will unmute and play audible
+          const unmuteOnFirstClick = async function() {
+            try {
+              bg.muted = false;
+              bg.volume = 0.08;
+              await bg.play();
+            } catch(er) {
+              // still blocked — nothing to do, user gesture required
+            } finally {
+              document.body.removeEventListener('click', unmuteOnFirstClick);
+            }
+          };
+          document.body.addEventListener('click', unmuteOnFirstClick, { once: true, passive: true });
+        }
+      });
+
+      // gentle auto hearts
+      setInterval(()=> spawnHearts(1), 1700);
+    });
+  </script>
+</body>
+</html>
