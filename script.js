@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
     // try to give a user gesture so audio can autoplay later (best-effort)
     try { document.getElementById('bg-music')?.play(); } catch(e){}
+    console.log("YES BUTTON CLICKED");
 
     // navigate to letter
     window.location.href = 'letter.html';
